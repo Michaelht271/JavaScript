@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael's Page - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Inline CSS for demonstration purposes */
+        #image {
+            width: 300px; /* Adjust size as needed */
+            height: 200px; /* Adjust size as needed */
+            background-color: #f0f0f0; /* Default background color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body onload="initGallery()">
+    <a href="#mainContent" class="skip-link">Skip to Main Content</a>
+    
+    <header class="navbar">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="IT.html">Information Technology</a>
+            <a href="Aboutus.html">About Us</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="headcontent">
+        <h1>Welcome to My Website</h1>
+        <p>My name is Michael, and this is my personal website where I showcase my projects, share my thoughts, and provide information about my services.</p>
+    </div>
+
+    <main id="mainContent">
+        <div class="content">
+            <h2>Services</h2>
+            <ul>
+                <li>Web Development</li>
+                <li>Mobile App Development</li>
+                <li>SEO Optimization</li>
+                <li>Consulting Services</li>
+            </ul>
+
+            <h2>Gallery</h2>
+            <div class="gallery">
+                <img src="Images/Untitled.jpeg" alt="Web Development" loading="lazy" onmouseover="upDate(this)" onmouseout="undo()" onfocus="handleFocus(this)" onblur="handleBlur(this)" tabindex="0">
+                <img src="Images/App.jpeg" alt="Mobile App Development" loading="lazy" onmouseover="upDate(this)" onmouseout="undo()" onfocus="handleFocus(this)" onblur="handleBlur(this)" tabindex="0">
+                <img src="Images/SEO.jpeg" alt="SEO Optimization" loading="lazy" onmouseover="upDate(this)" onmouseout="undo()" onfocus="handleFocus(this)" onblur="handleBlur(this)" tabindex="0">
+                <img src="Images/4.jpeg" alt="Consulting Services" loading="lazy" onmouseover="upDate(this)" onmouseout="undo()" onfocus="handleFocus(this)" onblur="handleBlur(this)" tabindex="0">
+                <img src="Images/ProjectShowcase.png" alt="Project Showcase" loading="lazy" onmouseover="upDate(this)" onmouseout="undo()" onfocus="handleFocus(this)" onblur="handleBlur(this)" tabindex="0">
+            </div>
+
+            <div id="image">
+                Hover over an image below to display here.
+            </div>
+
+            <h2>Contact Me</h2>
+            <form action="/submit_form" method="POST">
+                <label for="name">Your Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Your Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Michael Nguyen. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" class="social-link">Facebook</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize the gallery on page load
+        function initGallery() {
+            console.log("Gallery initialized");
+            const images = document.querySelectorAll('.gallery img');
+            for (let i = 0; i < images.length; i++) {
+                images[i].setAttribute('tabindex', '0'); // Ensure all images are focusable
+            }
+        }
+
+        // JavaScript function to update the image and text
+        function upDate(previewPic) {
+            console.log("Event Triggered");
+            console.log("Alt: " + previewPic.alt);
+            console.log("Source: " + previewPic.src);
+
+            document.getElementById("image").innerHTML = previewPic.alt;
+            document.getElementById("image").style.backgroundImage = "url('" + previewPic.src + "')";
+        }
+
+        // JavaScript function to undo the changes
+        function undo() {
+            document.getElementById("image").style.backgroundImage = "url('')";
+            document.getElementById("image").innerHTML = "Hover over an image below to display here.";
+        }
+
+        // Handle focus event for images
+        function handleFocus(previewPic) {
+            console.log("Focus event triggered");
+            upDate(previewPic);
+        }
+
+        // Handle blur event for images
+        function handleBlur() {
+            console.log("Blur event triggered");
+            undo();
+        }
+    </script>
+</body>
+</html>
